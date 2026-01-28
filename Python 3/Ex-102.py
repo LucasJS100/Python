@@ -9,11 +9,9 @@ def fatorial(num=1, Show=False):
     f = 1
     print('-'*25)
     for cont in range(num, 0, -1):
-        f *= cont
         if Show:
             print(f'{cont}', end=' X ' if cont > 1 else ' = ')
-        else:
-            return f
+        f *= cont
     return f
 
 
