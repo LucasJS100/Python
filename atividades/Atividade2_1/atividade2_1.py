@@ -1,19 +1,19 @@
-lista_pessoas = []
+listadaspessoas = []
 
-def dadosPessoa(nome='', cidade=''):
+def infoPessoa(nome='', cidade=''):
     listaDados = {
         "nome": nome,
         "cidade": cidade
     }
-    lista_pessoas.append(listaDados)
+    listadaspessoas.append(listaDados)
     
-def listarCadastros():
-    for i in lista_pessoas:
+def exibirCadastros():
+    for i in listadaspessoas:
         print(f"Nome: {i['nome']} | Cidade: {i['cidade']}")
 
 
-def buscarCadastro(procurarNome):
-    for a in lista_pessoas:
-        if a['nome'].lower() == procurarNome.lower():
-            return f"O nome {procurarNome} está na lista: Nome: {a['nome']} | Cidade: {a['cidade']}"
-    return f"O nome {procurarNome} não foi encontrado."
+def verificarNome(buscarNome):
+    for a in listadaspessoas:
+        if a['nome'].lower() == buscarNome.lower():
+            return f"O nome {buscarNome} está na lista: Nome: {a['nome']} | Cidade: {a['cidade']}"
+    return f"O nome {buscarNome} não foi encontrado."

@@ -14,12 +14,12 @@ while True:
         case 1:
             nome = str(input("Digite um nome: "))
             cidade = str(input("Digite a cidade: "))
-            dadosPessoa(nome, cidade)
+            infoPessoa(nome, cidade)
         case 2:
-            listarCadastros()
+            exibirCadastros()
         case 3:
             procurar = str(input("Digite o nome que quer procurar: "))
-            print(buscarCadastro(procurar))
+            print(verificarNome(procurar))
         case 4:
             print("Desligando...")
             break
