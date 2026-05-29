@@ -6,6 +6,7 @@ class BebidaQuente(ABC):
         self.ferver_agua()
         self.misturar()
         self.servir()
+        print("--- Bebida Pronta ---")
     def ferver_agua(self):
         print("1. Fervendo água a 100 graus Celsius.")
 
@@ -23,7 +24,6 @@ class Cafe(BebidaQuente):
     
     def servir(self):
         print("3. Servindo em xícara pequena.")
-        print("--- Bebida Pronta ---")
     
 class Cha(BebidaQuente):
     def misturar(self):
@@ -31,7 +31,6 @@ class Cha(BebidaQuente):
     
     def servir(self):
         print("3. Servindo na canelca de percelana com limão.")
-        print("--- Bebida Pronta ---")
 
 class Leite(BebidaQuente):
     def misturar(self):
@@ -39,7 +38,6 @@ class Leite(BebidaQuente):
     
     def servir(self):
         print("3. Servindo na caneca grande, já com café.")
-        print("--- Bebida Pronta ---")
 
 
 bebida = Leite()

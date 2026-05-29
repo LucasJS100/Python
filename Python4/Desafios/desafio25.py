@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from rich import print
 from rich.table import Table
 from rich.console import Console
 
@@ -7,7 +8,7 @@ console = Console()
 class Transporte(ABC):
     def __init__(self, distancia):
         self.distancia = distancia
-        frete = 0
+        self.frete = 0
     
     @abstractmethod
     def calc_frete(self):
@@ -53,15 +54,20 @@ class Drone(Transporte):
             return "Raio máximo de 10Km"
 
 
-dist = 8
+dist = 80
 
 entrega = Drone(dist)
 viagem = [Moto(dist), Caminhao(dist), Drone(dist)]
 
 # print(f"Frete de {type(entrega).__name__} em {dist}Km = {entrega.calc_frete()}")
 
-table = Table(title="Tabela de Fretes")
+tabela = Table(title="Tabela de Fretes")
 
-table.add_column("Distancia", justify="left")
-table.add_column("Tipo")
-table.add_column("Frete", justify="right")
+tabela.add_column("Distancia")
+tabela.add_column("Tipo")
+tabela.add_column("Frete")
+
+for item in viagem:
+    tabela.add_row(f"{dist}Km", f"{type(item).__name__}", f"{item.calc_frete()}")
+
+print(tabela)

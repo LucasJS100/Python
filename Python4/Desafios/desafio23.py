@@ -19,7 +19,7 @@ class Quadrado(Poligono):
         super().__init__(qtd_lados)
     
     def perimetro(self):
-        return self.qtd_lados + self.qtd_lados + self.qtd_lados + self.qtd_lados
+        return self.qtd_lados * 4
     
     def area(self):
         return self.qtd_lados ** 2
@@ -34,6 +34,6 @@ class Circulo(Poligono):
     def area(self):
         return pi * self.qtd_lados**2
 
-p1 = Circulo(20)
+p1 = Quadrado(12)
 print(f"Perímetro = {p1.perimetro():.1f}")
 print(f"Area = {p1.area():.1f}")
