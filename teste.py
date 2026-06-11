@@ -1,3 +1,7 @@
-a = str(input("Numero: "))
+palavra = "python"
+letras = list(palavra)
 
-print(a.find('.'))
+for i in letras:
+    valor_ascii = ord(i)
+    repbin = bin(valor_ascii)[2:]
+    print(f"{repbin}")
