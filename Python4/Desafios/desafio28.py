@@ -1,8 +1,8 @@
 from rich import inspect
 
 class Termostato():
-    def __init__(self, temperatura=24):
-        self.__temperatura = temperatura
+    def __init__(self):
+        self.__temperatura = 24
     
     @property
     def temperatura(self):
@@ -10,7 +10,7 @@ class Termostato():
     
     @property
     def ftemperatura(self):
-        return f"{self.__temperatura}ºC"
+        return f"{self.__temperatura}{chr(176)}C"
     
     @temperatura.setter
     def temperatura(self, valor):
@@ -22,9 +22,9 @@ class Termostato():
             elif valor < 16:
                 self.__temperatura = 16
         else:
-            print("Valor Inválido, escolha números multiplos de 0.5")
+            raise ValueError(f"Temperatura de {valor}{chr(176)}C é inválida!")
 
 t = Termostato()
-t.temperatura = 25.2
+t.temperatura = 25
 inspect(t, private=True, methods=True)
 print(f"A temperatura atual é {t.ftemperatura}")
