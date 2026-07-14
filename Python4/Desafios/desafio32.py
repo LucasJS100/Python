@@ -9,44 +9,69 @@ class ContaBancaria():
         if chave is None:
             chave = self.pede_senha()
         self.__hash = sha256(chave.encode()).hexdigest()
-        print(f"Conta {self._id} criada com sucesso. Saldo atual de R${self.__saldo:,}")
-        if chave == None:
-            self.pede_senha()
+        print(f"Conta {self._id} criada com sucesso. Saldo atual de R${self.__saldo:,.2f}")
 
-    @property
-    def nome(self):
-        return self._titular
+    def pede_senha(self) -> str:
+
+        from pwinput import pwinput
+
+        while True:
+            senha = str(pwinput("Senha: ")).strip()
+            if len(senha) >= 6:
+                break
+        
+        return senha
+    
+    def validar_senha(self, chave):
+        usuario = sha256(chave.encode()).hexdigest()
+        if usuario == self.__hash:
+            return True
+        else:
+            return False
+        
+    def __str__(self):
+        return f"A conta {self._id} de {self._titular} tem R${self.__saldo:,.2f} de saldo."
+        #return f"Estado atual da conta: {self.__dict__}"
 
     def depositar(self, valor):
         self.__saldo += valor
         print(f"Deposito de R${valor:.2f} autorizado na conta {self._id}")
 
-    def pede_senha(self) -> str:
-        from pwinput import pwinput
-        while True:
-            senha = str(pwinput("Senha: ")).strip()
-            if len(senha) >= 6:
-                break
 
     def sacar(self, valor:float, chave:str = None):
+        valor = abs(valor)
+
         if chave is None:
             chave = self.pede_senha()
-
-        if chave == self.__hash:
-            if valor <= self.__saldo:
-                self.__saldo -= valor
-                print(f"Saque de R${valor:.2f} autorizado na conta {self._id}")
+        
+        if self.validar_senha(chave):
+            if valor > self.__saldo:
+                print(f"Saque NEGADO de R${valor:,.2f} na conta {self._id}: SALDO INSUFICIENTE")
             else:
-                print("Saque não realizado. Valor mais alto que o no saldo.")
+                self.__saldo -= valor
+                print(f"Saque de R${valor:,.2f} autorizado a conta {self._id}")
         else:
-            print("Senha não confere. Saque não autorizado!")
+            print(f"Senha não confere. Saque não autorizado!")
 
-
-    def validar_senha(self, chave:str) -> bool:
-        ...
+    @property
+    def nome(self):
+        return self._titular
     
-print("Criando a conta...")
-cc = ContaBancaria(123, "Gustavo", 1000)
+    @nome.setter
+    def nome(self, novonome:str = None):
+        chave = self.pede_senha()
 
+        if self.validar_senha(chave):
+            if len(novonome) >= 5:
+                self._titular = novonome
+            else:
+                print("Senha não confere. Não posso alterar o nome")
+
+                
+print("Criando a conta...")
+cc = ContaBancaria(111, "Josenildo", 10_000)
+
+print("Vou tentar sacar...")
+cc.sacar(500)
 
 #inspect(cc, private=True, methods=True)
