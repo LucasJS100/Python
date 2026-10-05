@@ -34,7 +34,7 @@ class Boleto(Pagamento):
             return f"Falha no pagamento de {self.fvalor} via Boleto"
 
 
-class PIX(Pagamento):
+class Pix(Pagamento):
     def pagar(self, valor):
         try:
             self.valor = valor
@@ -54,3 +54,6 @@ class CartaoCrédito(Pagamento):
 
 def finalizar_compra(forma:Pagamento, valor:float):
     print(forma.pagar(valor))
+
+
+finalizar_compra(CartaoCrédito(), 25_324.20)
